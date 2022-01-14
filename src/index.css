@@ -11,6 +11,7 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
 .header {
+  /* width: 1200px; */
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -36,8 +37,12 @@ code {
 }
 .cart {
   display: flex;
-  justify-content: space-between;
+  justify-content: start;
 }
 .imgCart {
   width: 300px;
+}
+.content{
+  margin: 0 auto;
+  max-width: 900px;
 }
