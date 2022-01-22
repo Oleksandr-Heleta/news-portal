@@ -1,11 +1,13 @@
 import React from 'react';
+import defImg from '../img/defImg.jpg'
 
 function Cart({ urlToImage, title, description, url, source }) {
+  const imgUrl = urlToImage ? urlToImage : defImg;
   return (
     <>
       <div className="cart">
         <div>
-          <img src={urlToImage} className="imgCart" alt="3" />
+          <img src={imgUrl} className="imgCart" alt="3" />
         </div>
         <div>
           <h1>{title}</h1>

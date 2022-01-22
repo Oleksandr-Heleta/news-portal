@@ -10,21 +10,12 @@ function Links({ onChangeCountry }) {
     let selectCountry;
     counrties.forEach((obj) => { if (obj.id === selectCountryId) return selectCountry = obj; });
 
-
-
-    console.log(selectCountry);
     setCountry(selectCountry);
     onChangeCountry(selectCountry);
   };
 
 
 
-
-
-
-
-
-  console.log(country.buttons)
 
   return (
     <header className="header">

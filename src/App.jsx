@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 import Links from './components/Links';
 import { counrties } from './statics';
@@ -18,10 +18,12 @@ function App() {
       <div>
         <Links onChangeCountry={onChangeCountry} />
         <div className="content">
-          {
-            country.buttons.map(obj => <Route exact path={'/' + obj.path} component={() => <Content category={obj.path} country={country.id} />} />)
-          }
-
+          <Switch>
+            {
+              country.buttons.map((obj, index) => <Route key={index} exact path={'/' + obj.path} component={() => <Content category={obj.path} country={country.id} />} />)
+            }
+            <Route render={() => <p style={{ textAlign: 'center' }}>Not Found</p>} />
+          </Switch>
         </div>
       </div>
     </Router>

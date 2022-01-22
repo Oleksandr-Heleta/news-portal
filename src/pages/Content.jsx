@@ -1,8 +1,8 @@
 import React from 'react';
-import axios from 'axios';
+
 
 import Cart from '../components/Cart';
-import { requestData, apiKey } from '../statics';
+import { requestData } from '../statics';
 
 function Content({ country, category }) {
 
@@ -10,26 +10,33 @@ function Content({ country, category }) {
 
 
   const [news, setNews] = React.useState(null);
+  const [isLoading, setIsLoading] = React.useState(false);
+  const [isError, setIsError] = React.useState(null);
   React.useEffect(() => {
-
-    let url;
-    category === '' ? url = `https://newsapi.org/v2/top-headlines?country=${country}&apiKey=${apiKey}`
-      : url = `https://newsapi.org/v2/top-headlines?country=${country}&category=${category}&apiKey=${apiKey}`;
-
-    axios.get(url).then(({ data }) => {
-      console.log(data.articles);
-      setNews(data.articles);
-
-    });
-
-
-
-
+    requestData(country, category)
+      .then(data => {
+        console.log(data);
+        setNews(data);
+        setIsLoading(true)
+      }).catch(error => {
+        console.log(error.status);
+        setIsError(error);
+        setIsLoading(true)
+      });
 
   }, [country, category]);
 
-  return <div>{console.log(news)}
-    {news && news.map((obj, index) => <Cart key={index} {...obj} />)}</div>;
+
+
+
+  return (<div>
+
+
+    {!isLoading ? <h3 style={{ textAlign: 'center' }}>Loading ...</h3> :
+
+      (isError ? <p style={{ textAlign: 'center' }}>{isError.message}</p>
+        : news.map((obj, index) => <Cart key={index} {...obj} />))}
+  </div>);
 }
 
 export default Content;
